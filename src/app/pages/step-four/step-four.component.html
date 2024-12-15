@@ -1,0 +1,46 @@
+@if (showThankYou) {
+
+<div class="thank-you">
+  <img
+    ngSrc="../../../assets/images/icon-thank-you.svg"
+    alt=""
+    width="80"
+    height="80"
+  />
+  <h1>Thank you!</h1>
+  <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support&#64;loremgaming.com.</p>
+</div>
+} @else {
+<h1>Finishing up</h1>
+<p>Double-check everything looks OK before confirming.</p>
+
+<div class="step-four-container">
+  <!-- Plan Summary Section -->
+  <div class="plan-summary">
+    <div>
+      <h3>{{ selectedPlan?.plan }} ({{ isYearly ? "Yearly" : "Monthly" }})</h3>
+      <p class="change-btn" (click)="changePlan()">Change</p>
+    </div>
+    <p class="plan">
+      {{ isYearly ? selectedPlan?.yearly : selectedPlan?.monthly }}
+    </p>
+  </div>
+
+  <!-- Add-ons Section -->
+  <div class="addons-summary">
+    @for (addon of selectedAddons; track $index) {
+    <div class="addon">
+      <p class="title">{{ addon.title }}</p>
+      <p class="price">+{{ addon.price }}</p>
+    </div>
+    }
+  </div>
+</div>
+
+<div class="total-summary">
+  <h3>Total (per {{ isYearly ? "year" : "month" }})</h3>
+  <p>{{ getTotalCost() }}</p>
+</div>
+
+<app-button (confirmClicked)="onConfirmClicked($event)" />
+}

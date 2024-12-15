@@ -1,0 +1,16 @@
+<div>
+  @if (previousRoute) {
+  <button class="prev-button" (click)="goBack()">Go Back</button>
+  }
+  <button
+    class="next-button"
+    type="submit"
+    (click)="nextRoute !== '/sign-up/step2' ? nextStep() : ''"
+    [ngStyle]="{
+      'margin-left': !previousRoute ? 'auto' : '0px',
+      'background-color': nextRoute === null ? 'var(--purple)' : ''
+    }"
+  >
+    {{ nextRoute === null ? "Confirm" : "Next Step" }}
+  </button>
+</div>

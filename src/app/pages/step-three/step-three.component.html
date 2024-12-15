@@ -1,0 +1,28 @@
+<h1>Pick add-ons</h1>
+<p>Add-ons help enhance your gaming experience.</p>
+
+<div class="addons-container">
+  @for (addon of addons; track addon.id) {
+
+  <div
+    class="addon-item"
+    [class.selected]="selectedAddons.includes(addon.id)"
+    (click)="toggleAddon(addon.id)"
+  >
+    <div class="addon-info">
+      <input
+        type="checkbox"
+        [checked]="selectedAddons.includes(addon.id)"
+        (change)="toggleAddon(addon.id)"
+      />
+      <div>
+        <h2>{{ addon.title }}</h2>
+        <p class="addon-description">{{ addon.description }}</p>
+      </div>
+    </div>
+    <p class="addon-price">{{ addon.price }}</p>
+  </div>
+  }
+</div>
+
+<app-button></app-button>

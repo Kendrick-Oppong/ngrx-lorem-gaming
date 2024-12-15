@@ -1,0 +1,80 @@
+h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--denim);
+}
+
+h2 {
+  color: var(--denim);
+  font-size: 1.6rem;
+  margin-block: 3.9rem 0.7rem;
+}
+
+p {
+  color: var(--grey);
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-top: 1.1rem;
+}
+
+.addons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  margin-block: 3.2rem;
+}
+
+.addon-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--grey);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+input[type="checkbox"] {
+  width: 2rem;
+  height: 2rem;
+  accent-color: var(--purple);
+}
+
+.addon-item.selected {
+  border: 2px solid var(--purple);
+}
+
+.addon-item:hover {
+  border-color: var(--purple);
+}
+
+.addon-info {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.addon-info h2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.addon-info p {
+  margin: 0;
+  color: var(--grey);
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.addon-price {
+  color: var(--purple);
+  font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 3.2rem;
+  }
+}

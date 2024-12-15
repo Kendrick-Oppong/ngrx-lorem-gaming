@@ -1,0 +1,38 @@
+<h1>Select your plan</h1>
+<p>You have the option of monthly or yearly billing</p>
+
+<div class="plans-container">
+  @for (plan of plans; track plan.id) {
+  <div
+    [class]="{ selected: selectedPlanId === plan.id }"
+    class="plan-container"
+    (click)="selectPlan(plan.id)"
+  >
+    <img [ngSrc]="plan.image" width="40" height="40" alt="" priority />
+    <div class="plans">
+      <h2>{{ plan.plan }}</h2>
+      <p>{{ isYearly ? plan.yearly : plan.monthly }}</p>
+      <p class="yearly">{{ isYearly ? "2 months free" : "" }}</p>
+    </div>
+  </div>
+  }
+</div>
+
+<div class="switch-container">
+  <h2 [class]="{ selected: !isYearly }">Monthly</h2>
+  <label class="switch" aria-label="Enable feature">
+    <input
+      type="checkbox"
+      role="switch"
+      aria-checked="false"
+      [checked]="isYearly"
+      (change)="onPlanToggle($event)"
+    />
+    <span class="slider"></span>
+  </label>
+  <h2 [class]="{ selected: isYearly }">Yearly</h2>
+</div>
+
+<div>
+  <app-button />
+</div>

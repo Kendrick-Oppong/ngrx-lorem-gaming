@@ -1,0 +1,94 @@
+h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--denim);
+}
+
+p {
+  color: var(--grey);
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-top: 1.1rem;
+}
+
+.step-four-container {
+  margin-block: 3.2rem;
+  background-color: var(--very-light-grey);
+  padding: 1.6rem 2.4rem;
+  border-radius: 0.8rem;
+}
+
+.change-btn {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.change-btn:hover {
+  color: var(--purple);
+}
+
+.plan-summary {
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 2.4rem;
+}
+
+.addons-summary {
+  margin-top: 2.4rem;
+}
+
+.plan-summary,
+.addon,
+.total-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.plan-summary h3,
+.plan {
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--denim);
+}
+
+.plan-summary .plan {
+  font-weight: 700;
+}
+
+.addons-summary .price {
+  font-weight: 400;
+  color: var(--denim);
+}
+
+.total-summary h3 {
+  font-size: 1.4rem;
+  color: var(--grey);
+  font-weight: 400;
+}
+
+.total-summary p {
+  color: var(--purple);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.thank-you {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.thank-you h1 {
+  font-weight: 700;
+  font-size: 3.2rem;
+  color: var(--denim);
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 3.2rem;
+  }
+}

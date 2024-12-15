@@ -1,0 +1,26 @@
+<h1>Personal info</h1>
+<p>Please provide your name, email address, and phone number</p>
+
+<form [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
+  @for (formItem of forms; track $index) {
+  <div>
+    <div class="label-response">
+      <label [for]="formItem.name">{{ formItem.label }}</label>
+      @if(hasError(formItem.name, 'required')){
+      <p class="error-message">This field is required</p>
+      }
+    </div>
+    <input
+      [type]="formItem.type"
+      [id]="formItem.name"
+      [formControlName]="formItem.name"
+      [placeholder]="formItem.placeholder"
+      [name]="formItem.name"
+      [class.invalid]="hasError(formItem.name, 'required')"
+      required
+    />
+  </div>
+  }
+
+  <app-button></app-button>
+</form>

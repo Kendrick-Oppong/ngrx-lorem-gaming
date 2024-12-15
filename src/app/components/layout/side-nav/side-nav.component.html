@@ -1,0 +1,17 @@
+<aside>
+  @for (step of steps; track $index) {
+  <div class="step-container">
+    <div [class.active-step]="isRouteActive(step.path)" class="step-index">
+      <a [routerLink]="step.path" ariaCurrentWhenActive="page">
+        <p>{{ step.index }}</p>
+      </a>
+    </div>
+    <div class="step-number-title">
+      <a [routerLink]="step.path" ariaCurrentWhenActive="page">
+        <p>{{ step.step }}</p>
+        <h2>{{ step.title }}</h2>
+      </a>
+    </div>
+  </div>
+  }
+</aside>
