@@ -1,4 +1,4 @@
-@if (showThankYou) {
+@if (isFormCompleted()) {
 
 <div class="thank-you">
   <img
@@ -8,7 +8,11 @@
     height="80"
   />
   <h1>Thank you!</h1>
-  <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support&#64;loremgaming.com.</p>
+  <p>
+    Thanks for confirming your subscription! We hope you have fun using our
+    platform. If you ever need support, please feel free to email us at
+    support&#64;loremgaming.com.
+  </p>
 </div>
 } @else {
 <h1>Finishing up</h1>
@@ -42,5 +46,5 @@
   <p>{{ getTotalCost() }}</p>
 </div>
 
-<app-button (confirmClicked)="onConfirmClicked($event)" />
+<app-button />
 }

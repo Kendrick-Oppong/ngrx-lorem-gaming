@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { step2Config, step3Config } from '@constants/form-config.constants';
@@ -9,6 +9,8 @@ import {
 } from '@interface/form-data';
 import { FormStorageService } from '@services/form-storage.service';
 import { ButtonComponent } from '../../components/button/button.component';
+import { Store } from '@ngrx/store';
+import { selectConfirm } from 'app/store/form/form.reducer';
 
 @Component({
   selector: 'app-step-four',
@@ -18,10 +20,12 @@ import { ButtonComponent } from '../../components/button/button.component';
   styleUrls: ['./step-four.component.css'],
 })
 export class StepFourComponent {
+  private readonly store = inject(Store);
   selectedPlan: StepTwoConfig | undefined;
   isYearly = false;
   selectedAddons: StepThreeConfig[] = [];
-  showThankYou = false;
+
+  isFormCompleted = this.store.selectSignal(selectConfirm);
 
   constructor(
     private router: Router,
@@ -49,7 +53,6 @@ export class StepFourComponent {
   }
 
   getTotalCost(): string {
-  
     if (
       !this.selectedPlan ||
       (!this.selectedPlan.yearly && !this.selectedPlan.monthly)
@@ -71,13 +74,5 @@ export class StepFourComponent {
 
   changePlan(): void {
     this.router.navigate(['sign-up/step2']);
-  }
-
-  onConfirmClicked(showThankYou: boolean): void {
-    this.showThankYou = showThankYou;
-    this.formStorageService.clearStorage();
-    setTimeout(() => {
-      this.router.navigate(['/']);
-    }, 2000);
   }
 }

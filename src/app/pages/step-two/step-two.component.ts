@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { step2Config } from '@constants/form-config.constants';
 import { NgOptimizedImage } from '@angular/common';
 import { ButtonComponent } from '@components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { FormStorageService } from '@services/form-storage.service';
-import { STORAGE_KEY } from '@interface/form-data';
+import { StepTwoPayload, STORAGE_KEY } from '@interface/form-data';
+import { Store } from '@ngrx/store';
+import { formActions } from 'app/store/form/form.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-step-two',
@@ -17,6 +20,8 @@ export class StepTwoComponent implements OnInit {
   readonly plans = step2Config;
   isYearly = false;
   selectedPlanId = 1;
+
+  private readonly store = inject(Store);
 
   constructor(private formStorageService: FormStorageService) {}
 
@@ -32,10 +37,17 @@ export class StepTwoComponent implements OnInit {
   }
 
   saveToLocalStorage(): void {
+    const payload = {
+      planId: this.selectedPlanId,
+      isYearly: this.isYearly,
+    };
     this.formStorageService.setItem(STORAGE_KEY.STEP2, {
-      planId: this.selectedPlanId ,
+      planId: this.selectedPlanId,
       isYearly: this.isYearly,
     });
+    this.store.dispatch(
+      formActions.stepTwo({ stepPayload: payload as StepTwoPayload })
+    );
   }
 
   ngOnInit(): void {
