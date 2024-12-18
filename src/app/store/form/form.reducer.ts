@@ -1,24 +1,6 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { formActions, localStorageActions } from './form.actions';
-import { FormStorageConfig } from '@interface/form-data';
-
-interface State {
-  confirm: boolean;
-  formFields: {
-    stepOne: {
-      name: string;
-      emailAddress: string;
-      phoneNumber: string;
-    };
-    stepTwo: {
-      isYearly: boolean;
-      selectedPlanId: number;
-    };
-    stepThree: {
-      addons: number[];
-    };
-  };
-}
+import { FormStorageConfig, State } from '@interface/form-data';
 
 const initialState: State = {
   confirm: false,

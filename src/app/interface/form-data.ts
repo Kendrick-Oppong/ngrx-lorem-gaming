@@ -29,3 +29,22 @@ export enum STORAGE_KEY {
   STEP2 = 'step2',
   STEP3 = 'step3',
 }
+
+
+export interface State {
+  confirm: boolean;
+  formFields: {
+    stepOne: {
+      name: string;
+      emailAddress: string;
+      phoneNumber: string;
+    };
+    stepTwo: {
+      isYearly: boolean;
+      selectedPlanId: number;
+    };
+    stepThree: {
+      addons: number[];
+    };
+  };
+}
