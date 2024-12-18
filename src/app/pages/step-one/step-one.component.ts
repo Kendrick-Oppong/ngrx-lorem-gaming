@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@components/button/button.component';
 import { step1Config } from '@constants/form-config.constants';
-import { STORAGE_KEY } from '@interface/form-data';
+import { StepOnePayload, STORAGE_KEY } from '@interface/form-data';
+import { Store } from '@ngrx/store';
 import { FormStorageService } from '@services/form-storage.service';
+import { formActions } from 'app/store/form/form.actions';
 
 @Component({
   selector: 'app-step-1',
@@ -16,6 +18,8 @@ import { FormStorageService } from '@services/form-storage.service';
 })
 export class StepOneComponent implements OnInit {
   readonly forms = step1Config;
+
+  private readonly store = inject(Store);
 
   constructor(
     private router: Router,
@@ -48,7 +52,13 @@ export class StepOneComponent implements OnInit {
     if (this.personalInfoForm.invalid) {
       this.personalInfoForm.markAllAsTouched();
     } else {
-      this.formStorageService.setItem(STORAGE_KEY.STEP1, step1Data);
+      this.formStorageService.setItem(
+        STORAGE_KEY.STEP1,
+        step1Data as StepOnePayload
+      );
+      this.store.dispatch(
+        formActions.stepOne({ stepPayload: step1Data as StepOnePayload })
+      );
       this.router.navigate(['sign-up/step2']);
     }
   }

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { STORAGE_KEY } from '@interface/form-data';
+import { Store } from '@ngrx/store';
+import { FormStorageConfig, STORAGE_KEY } from '@interface/form-data';
+import { localStorageActions } from 'app/store/form/form.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormStorageService {
-  setItem(key: STORAGE_KEY, value: any): void {
-    localStorage.setItem(key, JSON.stringify(value));
+  constructor(private store: Store) {}
+
+  setItem(key: STORAGE_KEY, value: FormStorageConfig): void {
+    this.store.dispatch(localStorageActions.setItem({ key, value }));
   }
 
   getItem(key: STORAGE_KEY) {
@@ -14,11 +18,11 @@ export class FormStorageService {
     return storedData ? JSON.parse(storedData) : null;
   }
 
-  removeItem(key: string): void {
-    localStorage.removeItem(key);
+  removeItem(key: STORAGE_KEY): void {
+    this.store.dispatch(localStorageActions.removeItem({ key }));
   }
 
   clearStorage(): void {
-    localStorage.clear();
+    this.store.dispatch(localStorageActions.clearStorage());
   }
 }

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { step3Config } from '@constants/form-config.constants';
 import { STORAGE_KEY } from '@interface/form-data';
 import { FormStorageService } from '@services/form-storage.service';
-import { ButtonComponent } from "../../components/button/button.component";
+import { ButtonComponent } from '../../components/button/button.component';
+import { Store } from '@ngrx/store';
+import { formActions } from 'app/store/form/form.actions';
 
 @Component({
   selector: 'app-step-three',
@@ -14,6 +16,7 @@ import { ButtonComponent } from "../../components/button/button.component";
 export class StepThreeComponent {
   readonly addons = step3Config;
   selectedAddons: number[] = [];
+  private readonly store = inject(Store);
 
   constructor(private formStorageService: FormStorageService) {}
 
@@ -28,7 +31,7 @@ export class StepThreeComponent {
     if (this.selectedAddons.includes(addonId)) {
       this.selectedAddons = this.selectedAddons.filter((id) => id !== addonId);
     } else {
-      this.selectedAddons.push(addonId);
+       this.selectedAddons = [...this.selectedAddons, addonId];
     }
     this.saveData();
   }
@@ -37,5 +40,8 @@ export class StepThreeComponent {
     this.formStorageService.setItem(STORAGE_KEY.STEP3, {
       selectedAddons: this.selectedAddons,
     });
+    this.store.dispatch(
+      formActions.stepThree({ stepPayload: { addons: this.selectedAddons } })
+    );
   }
 }
